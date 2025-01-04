@@ -7,6 +7,10 @@
 <h1 class="mt-5">課題一覧</h1>
 <a href="../index.html" th:href="@{/}">トップページ</a>
 <a href="./creationForm.html" th:href="@{issues/creationForm}">作成</a>
+<form th:action="@{/issues/reset}" method="post" style="display:inline;">
+    <input type="hidden" name="_method" value="delete"/>
+    <button type="submit" class="btn btn-outline-danger">全削除</button>
+</form>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -22,8 +26,16 @@
                     (summary)
                 </a>
             </td>
-        </tr>
+            <td>
+                <form th:action="@{/issues/{issueId}(issueId=${issue.id})}" method="post">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button type="submit" class="btn btn-outline-danger">DONE</button>
+                </form>
+            </td>
+
     </tbody>
 </table>
 </body>
 </html>
+
+

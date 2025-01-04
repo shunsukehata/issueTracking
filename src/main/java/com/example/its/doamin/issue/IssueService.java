@@ -30,4 +30,15 @@ public class IssueService {
     public IssueEntity findById(Long issueId) {
         return issueRepository.findById(issueId);
     }
+
+    @Transactional
+    public void deleteIssue(Long issueId) {
+        issueRepository.deleteById(issueId);
+    }
+
+    @Transactional
+    public void deleteAllIssues() {
+        issueRepository.deleteAll();
+        issueRepository.resetAutoIncrement();
+    }
 }

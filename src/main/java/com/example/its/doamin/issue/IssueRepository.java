@@ -1,9 +1,6 @@
 package com.example.its.doamin.issue;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -19,5 +16,14 @@ public interface IssueRepository {
 
     @Select("SELECT * FROM issues WHERE id = #{issueId}")
     IssueEntity findById(long issueId);
+
+    @Delete("DELETE FROM issues where id=#{issueId};")
+    void deleteById(long issueId);
+
+    @Delete("DELETE FROM issues")
+    void deleteAll();
+
+    @Update("ALTER TABLE issues AUTO_INCREMENT = 1")
+    void resetAutoIncrement();
 
 }

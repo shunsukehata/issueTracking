@@ -3,6 +3,8 @@ package com.example.its.web.issue;
 import com.example.its.doamin.issue.IssueEntity;
 import com.example.its.doamin.issue.IssueService;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,4 +45,17 @@ public class IssueController {
         model.addAttribute("issue", issueService.findById(issueId));
         return "issues/detail";
     }
+
+    @DeleteMapping("/{issueId}")
+    public String deleteIssue(@PathVariable("issueId") Long issueId) {
+        issueService.deleteIssue(issueId);
+        return "redirect:/issues";
+    }
+
+    @DeleteMapping("/reset")
+    public String resetIssues() {
+        issueService.deleteAllIssues();
+        return "redirect:/issues";
+    }
+
 }
