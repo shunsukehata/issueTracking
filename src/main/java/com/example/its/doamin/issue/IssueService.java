@@ -41,4 +41,9 @@ public class IssueService {
         issueRepository.deleteAll();
         issueRepository.resetAutoIncrement();
     }
+
+    @Transactional
+    public void updateIssue(Long issueId, String summary, String description) {
+        issueRepository.update(issueId, summary, description);
+    }
 }

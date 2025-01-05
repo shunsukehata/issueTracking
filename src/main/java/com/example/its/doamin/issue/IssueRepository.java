@@ -1,6 +1,7 @@
 package com.example.its.doamin.issue;
 
 import org.apache.ibatis.annotations.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,5 +26,8 @@ public interface IssueRepository {
 
     @Update("ALTER TABLE issues AUTO_INCREMENT = 1")
     void resetAutoIncrement();
+
+    @Update("UPDATE issues SET summary = #{summary}, description = #{description} WHERE id = #{issueId}")
+    void update(@Param("issueId") Long issueId, @Param("summary") String summary, @Param("description") String description);
 
 }

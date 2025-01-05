@@ -58,4 +58,15 @@ public class IssueController {
         return "redirect:/issues";
     }
 
+    @PutMapping("/{issueId}")
+    public String updateIssue(@PathVariable("issueId") Long issueId, @Validated IssueForm form, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("issue", issueService.findById(issueId));
+            return "issues/detail";
+        }
+        issueService.updateIssue(issueId, form.getSummary(), form.getDescription());
+        return "redirect:/issues";
+    }
+
+
 }
